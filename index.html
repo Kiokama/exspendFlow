@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <title>ExpenseFlow - Quản Lý Chi Tiêu Đôi & Nhóm AI</title>
+    <meta name="description" content="Premium Mobile Fintech & Personal Expense Management App with Apple & Revolut aesthetic, smart AI assistant, budgets, wallets, and analytics." />
+    <meta property="og:title" content="ExpenseFlow - Quản Lý Chi Tiêu Đôi & Nhóm AI" />
+    <meta property="og:description" content="Premium Mobile Fintech & Personal Expense Management App with Apple & Revolut aesthetic, smart AI assistant, budgets, wallets, and analytics." />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+      // Gracefully ignore WebSocket/HMR transport errors in sandbox iFrame environment
+      window.addEventListener('error', function(event) {
+        var msg = (event && event.message) ? String(event.message) : '';
+        var filename = (event && event.filename) ? String(event.filename) : '';
+        if (
+          msg.includes('WebSocket') ||
+          msg.includes('createWebSocketModuleRunnerTransport') ||
+          filename.includes('@vite/client')
+        ) {
+          event.preventDefault();
+          event.stopImmediatePropagation();
+          return true;
+        }
+      }, true);
+
+      window.addEventListener('unhandledrejection', function(event) {
+        var reason = event && event.reason;
+        var msg = String((reason && (reason.message || reason.stack)) || reason || '');
+        if (
+          msg.includes('WebSocket') ||
+          msg.includes('createWebSocketModuleRunnerTransport') ||
+          msg.includes('@vite/client')
+        ) {
+          event.preventDefault();
+          event.stopImmediatePropagation();
+        }
+      });
+    </script>
+  </head>
+  <body class="font-sans antialiased selection:bg-blue-500 selection:text-white">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+

@@ -1,0 +1,6 @@
+{
+  "name": "ExpenseFlow",
+  "description": "Premium Mobile Fintech & Personal Expense Management App with Apple & Revolut aesthetic, smart AI assistant, budgets, wallets, and analytics.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

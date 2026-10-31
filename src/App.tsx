@@ -716,9 +716,8 @@ export default function App() {
   // Convert NavTab to MobileTab for bottom nav
   const getMobileTab = (): MobileTab => {
     if (activeTab === "expenses") return "transactions";
-    if (activeTab === "analytics" || activeTab === "saas") return "stats";
-    if (activeTab === "budgets" || activeTab === "wallets") return "budgets";
-    if (activeTab === "profile") return "profile";
+    if (activeTab === "analytics" || activeTab === "saas" || activeTab === "debt_history" || activeTab === "budgets") return "stats";
+    if (activeTab === "profile" || activeTab === "wallets" || activeTab === "goals" || activeTab === "recurring" || activeTab === "bills" || activeTab === "calendar" || activeTab === "timeline" || activeTab === "settle" || activeTab === "spaces" || activeTab === "audit") return "profile";
     return "home";
   };
 
@@ -893,6 +892,12 @@ export default function App() {
               onExportCSV={() => exportToCSV(expenses, activeSpace.name, activeSpace.members)}
               onSelectTab={setActiveTab}
               onSelectExpense={(exp) => setSelectedDetailExpense(exp)}
+              onOpenBankSms={() => setIsBankSmsOpen(true)}
+              onOpenItemizedSplit={() => {
+                setItemizedInitialItems([]);
+                setItemizedInitialTitle("Chia từng món");
+                setIsItemizedSplitOpen(true);
+              }}
             />
           )}
 
@@ -944,6 +949,7 @@ export default function App() {
               onOpenOnboarding={() => setIsOnboardingOpen(true)}
               onOpenPairing={() => setIsPairingOpen(true)}
               onOpenEditProfile={() => setIsEditProfileOpen(true)}
+              onSelectTab={setActiveTab}
             />
           )}
 

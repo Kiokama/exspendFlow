@@ -143,51 +143,54 @@ export const OverviewDashboard: React.FC<OverviewDashboardProps> = ({
       {/* Hero Debt & Balance Cards Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
         
-        {/* Main Hero Card: Net Debt Status */}
-        <div className={`md:col-span-2 relative rounded-2xl p-5 sm:p-6 md:p-7 text-white shadow-xs flex flex-col justify-between transition-all duration-200 border ${
-          balance.netDebt === 0 || !balance.debtor
-            ? "bg-slate-900 border-slate-800 dark:bg-slate-950"
-            : balance.debtor.id === currentUser.id
-            ? "bg-slate-900 border-slate-800 dark:bg-slate-950"
-            : "bg-slate-900 border-slate-800 dark:bg-slate-950"
-        }`}>
+        {/* Main Hero Card: Net Debt Status (Tone Hồng / Rose & Pink Theme) */}
+        <div className="md:col-span-2 relative overflow-hidden rounded-2xl p-5 sm:p-6 md:p-7 shadow-xs border transition-all duration-200 border-rose-200/90 dark:border-rose-900/60 bg-gradient-to-br from-rose-50/90 via-pink-50/50 to-white dark:from-[#1f0b16] dark:via-[#160a14] dark:to-[#1a0c18] flex flex-col justify-between">
+          
+          {/* Subtle Decorative Ambient Pink Glows */}
+          <div className="absolute -top-16 -right-16 w-44 h-44 bg-rose-400/15 dark:bg-rose-500/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute -bottom-16 -left-16 w-44 h-44 bg-pink-400/15 dark:bg-pink-500/10 rounded-full blur-3xl pointer-events-none" />
+
           {/* Top Header: Title & Context */}
-          <div className="flex items-center justify-between gap-3 mb-5">
+          <div className="relative z-10 flex items-center justify-between gap-3 mb-5">
             <div className="flex items-center gap-2.5">
-              <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 border ${
-                balance.netDebt === 0
-                  ? "bg-emerald-500/10 border-emerald-500/20 text-emerald-400"
-                  : balance.debtor?.id === currentUser.id
-                  ? "bg-amber-500/10 border-amber-500/20 text-amber-400"
-                  : "bg-rose-500/10 border-rose-500/20 text-rose-400"
-              }`}>
+              <div className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 border bg-rose-100 dark:bg-rose-950/60 border-rose-200 dark:border-rose-800/70 text-rose-600 dark:text-rose-400 shadow-xs">
                 {balance.netDebt === 0 ? <CheckCircle2 className="w-4 h-4" /> : <CreditCard className="w-4 h-4" />}
               </div>
               <div>
-                <span className="text-[11px] font-semibold tracking-wider text-slate-400 uppercase block">
+                <span className="text-[11px] font-bold tracking-wider text-rose-600 dark:text-rose-400 uppercase block">
                   Tình trạng công nợ
                 </span>
-                <div className="text-xs text-slate-300 font-medium">Không gian: {activeSpace.name}</div>
+                <div className="text-xs text-slate-700 dark:text-slate-300 font-medium">
+                  Không gian: <span className="font-semibold text-slate-900 dark:text-white">{activeSpace.name}</span>
+                </div>
               </div>
             </div>
 
-            {/* Quiet status tag, not a glowing fake-live telemetry pill */}
-            <div className="text-[11px] font-medium text-slate-400 flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+            {/* Quiet status tag in tone hồng */}
+            <div className="text-[11px] font-medium text-rose-700 dark:text-rose-300 bg-rose-100/80 dark:bg-rose-950/60 border border-rose-200/80 dark:border-rose-800/60 px-2.5 py-1 rounded-full flex items-center gap-1.5 shadow-xs">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
+              </span>
               <span>Tự động đối soát</span>
             </div>
           </div>
 
           {/* Main Content Area */}
-          <div className="my-2 space-y-5">
+          <div className="relative z-10 my-2 space-y-5">
             {balance.netDebt === 0 || !balance.debtor ? (
-              <div className="p-5 rounded-xl bg-slate-800/50 border border-slate-700/60 flex items-center gap-4">
-                <div className="w-11 h-11 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 flex items-center justify-center shrink-0">
-                  <CheckCircle2 className="w-6 h-6" />
+              <div className="p-5 rounded-2xl bg-white/80 dark:bg-slate-900/60 border border-rose-200/80 dark:border-rose-800/50 shadow-xs backdrop-blur-xs flex items-center gap-4 transition-all">
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-tr from-rose-500 to-pink-500 text-white shadow-md shadow-rose-500/25 flex items-center justify-center shrink-0">
+                  <CheckCircle2 className="w-6 h-6 stroke-[2.2]" />
                 </div>
-                <div>
-                  <h2 className="text-base font-bold text-white">Số dư cân bằng</h2>
-                  <p className="text-xs text-slate-400 mt-0.5 leading-relaxed">
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <h2 className="text-base font-bold text-slate-900 dark:text-white">Số dư cân bằng</h2>
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-100 dark:bg-rose-950/80 text-rose-600 dark:text-rose-400 border border-rose-200/80 dark:border-rose-800/60">
+                      0đ tồn đọng
+                    </span>
+                  </div>
+                  <p className="text-xs text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">
                     Không có khoản nợ tồn đọng. Mọi chi phí chung giữa hai bạn đã được chia sẻ đều đặn.
                   </p>
                 </div>
@@ -196,40 +199,38 @@ export const OverviewDashboard: React.FC<OverviewDashboardProps> = ({
               <div className="space-y-4">
                 {/* Status Indicator & Clear Typographic Amount */}
                 <div>
-                  <div className="flex items-center gap-2 mb-1.5 text-xs text-slate-300 font-medium">
+                  <div className="flex items-center gap-2 mb-1.5 text-xs text-slate-600 dark:text-slate-300 font-medium">
                     <span>{balance.debtor.id === currentUser.id ? "Khoản bạn cần trả cho bạn cùng phòng" : "Khoản bạn sẽ nhận lại"}</span>
-                    <span className="text-slate-500">·</span>
-                    <span className={`font-semibold ${
-                      balance.debtor.id === currentUser.id ? "text-amber-300" : "text-emerald-300"
-                    }`}>
+                    <span className="text-rose-300 dark:text-rose-700">·</span>
+                    <span className="font-semibold text-rose-600 dark:text-rose-400 bg-rose-100/80 dark:bg-rose-950/70 px-2 py-0.5 rounded-md border border-rose-200/80 dark:border-rose-800/60 text-[11px]">
                       {balance.debtor.id === currentUser.id ? "Chờ chuyển khoản" : "Chờ hoàn tiền"}
                     </span>
                   </div>
 
-                  <div className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white font-mono">
+                  <div className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-rose-600 dark:text-rose-400 font-mono">
                     {formatVND(balance.netDebt)}
                   </div>
                 </div>
 
                 {/* Avatar Connection & Clean Summary */}
-                <div className="p-3.5 rounded-xl bg-slate-800/60 border border-slate-700/60 flex flex-wrap items-center justify-between gap-3">
+                <div className="p-3.5 rounded-xl bg-white/80 dark:bg-slate-900/60 border border-rose-200/80 dark:border-rose-800/50 flex flex-wrap items-center justify-between gap-3 shadow-xs">
                   <div className="flex items-center gap-2.5">
-                    <div className="flex items-center gap-2 bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-700/70">
-                      <img src={balance.debtor.avatar} alt={balance.debtor.name} className="w-6 h-6 rounded-full object-cover" />
-                      <span className="text-xs font-semibold text-slate-200">{balance.debtor.name}</span>
+                    <div className="flex items-center gap-2 bg-rose-50 dark:bg-rose-950/50 px-3 py-1.5 rounded-lg border border-rose-200/80 dark:border-rose-800/60">
+                      <img src={balance.debtor.avatar} alt={balance.debtor.name} className="w-6 h-6 rounded-full object-cover border border-rose-300" />
+                      <span className="text-xs font-semibold text-slate-800 dark:text-slate-200">{balance.debtor.name}</span>
                     </div>
 
-                    <ArrowLeftRight className="w-3.5 h-3.5 text-slate-400" />
+                    <ArrowLeftRight className="w-3.5 h-3.5 text-rose-400" />
 
-                    <div className="flex items-center gap-2 bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-700/70">
-                      <img src={balance.creditor?.avatar} alt={balance.creditor?.name} className="w-6 h-6 rounded-full object-cover" />
-                      <span className="text-xs font-semibold text-slate-200">{balance.creditor?.name}</span>
+                    <div className="flex items-center gap-2 bg-rose-50 dark:bg-rose-950/50 px-3 py-1.5 rounded-lg border border-rose-200/80 dark:border-rose-800/60">
+                      <img src={balance.creditor?.avatar} alt={balance.creditor?.name} className="w-6 h-6 rounded-full object-cover border border-pink-300" />
+                      <span className="text-xs font-semibold text-slate-800 dark:text-slate-200">{balance.creditor?.name}</span>
                     </div>
                   </div>
 
-                  <p className="text-xs text-slate-300 font-normal">
+                  <p className="text-xs text-slate-600 dark:text-slate-300 font-normal">
                     {balance.debtor.id === currentUser.id ? "Chuyển tiền cho " : `${balance.debtor.name} cần chuyển cho `}
-                    <strong className="text-white font-semibold">{balance.creditor?.name}</strong> để cân bằng số dư.
+                    <strong className="text-rose-600 dark:text-rose-400 font-semibold">{balance.creditor?.name}</strong> để cân bằng số dư.
                   </p>
                 </div>
               </div>
@@ -237,20 +238,30 @@ export const OverviewDashboard: React.FC<OverviewDashboardProps> = ({
           </div>
 
           {/* Footer Bar: Members & Primary Action Button */}
-          <div className="pt-4 mt-4 border-t border-slate-800 flex flex-wrap items-center justify-between gap-3">
+          <div className="relative z-10 pt-4 mt-4 border-t border-rose-200/70 dark:border-rose-900/50 flex flex-wrap items-center justify-between gap-3">
             <div className="flex items-center gap-2.5">
               <div className="flex -space-x-2">
-                <img src={memberA.avatar} alt={memberA.name} className="w-7 h-7 rounded-full ring-2 ring-slate-900 object-cover" />
-                <img src={memberB.avatar} alt={memberB.name} className="w-7 h-7 rounded-full ring-2 ring-slate-900 object-cover" />
+                <img 
+                  src={memberA.avatar} 
+                  alt={memberA.name} 
+                  className="w-7 h-7 rounded-full ring-2 ring-white dark:ring-slate-900 object-cover border border-rose-300 dark:border-rose-700" 
+                />
+                <img 
+                  src={memberB.avatar} 
+                  alt={memberB.name} 
+                  className="w-7 h-7 rounded-full ring-2 ring-white dark:ring-slate-900 object-cover border border-pink-300 dark:border-pink-700" 
+                />
               </div>
               <div className="text-xs">
-                <span className="font-semibold text-slate-200">{memberA.name} & {memberB.name}</span>
+                <span className="font-semibold text-slate-700 dark:text-slate-200">
+                  {memberA.name} <span className="text-rose-400">&</span> {memberB.name}
+                </span>
               </div>
             </div>
 
             <button
               onClick={onOpenSettleUp}
-              className="px-4 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 active:bg-rose-800 text-white font-semibold text-xs shadow-xs shadow-rose-500/25 transition-colors flex items-center gap-2 shrink-0 cursor-pointer"
+              className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-rose-500 via-rose-600 to-pink-600 hover:from-rose-600 hover:to-pink-700 active:scale-[0.98] text-white font-semibold text-xs shadow-md shadow-rose-500/25 transition-all duration-150 flex items-center gap-2 shrink-0 cursor-pointer"
             >
               <CreditCard className="w-4 h-4 text-white" />
               <span>Thanh toán cấn trừ</span>

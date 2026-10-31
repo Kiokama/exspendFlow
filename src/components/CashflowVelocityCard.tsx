@@ -82,58 +82,64 @@ export const CashflowVelocityCard: React.FC<CashflowVelocityCardProps> = ({
         </div>
       </div>
 
-      {/* Primary Metrics Grid */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-        <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200/70 dark:border-slate-800">
-          <span className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider block">
+      {/* Primary Metrics Row (Responsive High Density) */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3">
+        <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-800 flex sm:flex-col justify-between items-center sm:items-start">
+          <span className="text-xs font-medium text-slate-500 dark:text-slate-400">
             Tốc độ chi trung bình
           </span>
-          <span className="text-sm sm:text-base font-bold font-mono text-slate-900 dark:text-white mt-0.5 block">
-            {formatVND(dailyBurnRate)}
-          </span>
-          <span className="text-[10px] text-slate-400 block mt-0.5">
-            mỗi ngày
-          </span>
+          <div className="text-right sm:text-left sm:mt-1">
+            <span className="text-sm sm:text-base font-bold font-mono text-slate-900 dark:text-white block">
+              {formatVND(dailyBurnRate)}
+            </span>
+            <span className="text-[11px] text-slate-500 dark:text-slate-400 block">
+              mỗi ngày
+            </span>
+          </div>
         </div>
 
-        <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200/70 dark:border-slate-800">
-          <span className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider block">
+        <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-800 flex sm:flex-col justify-between items-center sm:items-start">
+          <span className="text-xs font-medium text-slate-500 dark:text-slate-400">
             Dự báo cuối tháng
           </span>
-          <span className={`text-sm sm:text-base font-bold font-mono mt-0.5 block ${
-            hasBudget && projectedMonthEnd > monthlyBudgetLimit
-              ? "text-rose-600 dark:text-rose-400"
-              : "text-slate-900 dark:text-white"
-          }`}>
-            {formatVND(projectedMonthEnd)}
-          </span>
-          <span className="text-[10px] text-slate-400 block mt-0.5">
-            còn {daysRemaining} ngày
-          </span>
+          <div className="text-right sm:text-left sm:mt-1">
+            <span className={`text-sm sm:text-base font-bold font-mono block ${
+              hasBudget && projectedMonthEnd > monthlyBudgetLimit
+                ? "text-rose-600 dark:text-rose-400"
+                : "text-slate-900 dark:text-white"
+            }`}>
+              {formatVND(projectedMonthEnd)}
+            </span>
+            <span className="text-[11px] text-slate-500 dark:text-slate-400 block">
+              còn {daysRemaining} ngày
+            </span>
+          </div>
         </div>
 
-        <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200/70 dark:border-slate-800 col-span-2 sm:col-span-1">
-          <span className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider block">
-            Ngân sách tháng
+        <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-800 flex sm:flex-col justify-between items-center sm:items-start">
+          <span className="text-xs font-medium text-slate-500 dark:text-slate-400">
+            Hạn mức tháng
           </span>
-          <span className="text-sm sm:text-base font-bold font-mono text-slate-900 dark:text-white mt-0.5 block">
-            {hasBudget ? formatVND(monthlyBudgetLimit) : "Chưa thiết lập"}
-          </span>
-          <span className="text-[10px] text-slate-400 block mt-0.5">
-            {hasBudget ? `Đã dùng ${budgetSpentPct}%` : "Cài đặt ở tab Ngân sách"}
-          </span>
+          <div className="text-right sm:text-left sm:mt-1">
+            <span className="text-sm sm:text-base font-bold font-mono text-slate-900 dark:text-white block">
+              {hasBudget ? formatVND(monthlyBudgetLimit) : "Chưa thiết lập"}
+            </span>
+            <span className="text-[11px] text-slate-500 dark:text-slate-400 block">
+              {hasBudget ? `Đã dùng ${budgetSpentPct}%` : "Chưa cài ngân sách"}
+            </span>
+          </div>
         </div>
       </div>
 
       {/* Progress Comparison Bar */}
       {hasBudget && (
-        <div className="space-y-1.5 pt-1">
-          <div className="flex items-center justify-between text-[11px] text-slate-500">
-            <span>Tiến độ ngày trong tháng: <strong className="text-slate-800 dark:text-slate-200">{monthProgressPct}%</strong></span>
-            <span>Đã dùng ngân sách: <strong className="text-slate-800 dark:text-slate-200">{budgetSpentPct}%</strong></span>
+        <div className="space-y-2 pt-1">
+          <div className="flex items-center justify-between text-xs text-slate-600 dark:text-slate-400">
+            <span>Tiến độ tháng: <strong className="text-slate-900 dark:text-slate-200 font-semibold">{monthProgressPct}%</strong></span>
+            <span>Đã dùng: <strong className="text-slate-900 dark:text-slate-200 font-semibold">{budgetSpentPct}%</strong></span>
           </div>
 
-          <div className="relative w-full h-3 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+          <div className="relative w-full h-2.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
             {/* Budget spent fill */}
             <div
               className={`h-full rounded-full transition-all duration-500 ${
@@ -147,14 +153,14 @@ export const CashflowVelocityCard: React.FC<CashflowVelocityCardProps> = ({
             />
             {/* Marker for current day of month */}
             <div
-              className="absolute top-0 bottom-0 w-0.5 bg-slate-900 dark:bg-white z-10 opacity-70"
+              className="absolute top-0 bottom-0 w-1 bg-slate-900 dark:bg-white z-10 rounded-full opacity-80"
               style={{ left: `${monthProgressPct}%` }}
               title={`Hôm nay là ngày ${currentDay} (${monthProgressPct}% của tháng)`}
             />
           </div>
-          <div className="flex justify-between text-[10px] text-slate-400">
-            <span>0₫</span>
-            <span>Mốc ngày hiện tại (|)</span>
+          <div className="flex justify-between text-[11px] text-slate-500 font-medium">
+            <span>0 ₫</span>
+            <span>Mốc ngày {currentDay}</span>
             <span>{formatVND(monthlyBudgetLimit)}</span>
           </div>
         </div>
